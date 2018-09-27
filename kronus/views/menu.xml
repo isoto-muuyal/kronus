@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+  	<menuitem name="Embarques" id="kronus_root_menu_embarques" sequence="10" />
+
+  	<!--<record id="embarcadores_list" model="ir.actions.act_window">
+        <field name="name">Embarcadores</field>
+        <field name="res_model">res.partner</field>
+        <field name="domain">[('embarcador','=','True')]</field>
+		<field name="context">{'default_embarcador' : 1, 'default_customer' : 0 }</field>
+  
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>-->
+
+    <record id="consignatarios_list" model="ir.actions.act_window">
+        <field name="name">Consignatarios y Embarcadores</field>
+        <field name="res_model">res.partner</field>
+        <!--<field name="domain">[('consignatario','=','True')]</field>
+		<field name="context">{'default_consignatario' : 1, 'default_customer' : 0 }</field>
+  -->
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="clientes_list" model="ir.actions.act_window">
+        <field name="name">Clientes</field>
+        <field name="res_model">res.partner</field>
+       <!--<field name="domain">[('customer','=','True')]</field>
+		<field name="context">{'default_customer' : 1 }</field>
+
+  -->
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="proveedores_list" model="ir.actions.act_window">
+        <field name="name">Proveedores</field>
+        <field name="res_model">res.partner</field>
+        <!--<field name="domain">[('supplier','=','True')]</field>
+		<field name="context">{'default_supplier' : 1, 'default_customer' : 0 }</field>
+  -->
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="agentes_list" model="ir.actions.act_window">
+        <field name="name">Agentes</field>
+        <field name="res_model">res.partner</field>
+        <!--<field name="domain">[('agente','=','True')]</field>
+		<field name="context">{'default_agente' : 1,'default_customer' : 0 }</field>
+  -->
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+
+  	<!--<menuitem name="Embarcadores" id="kronus_menu_embarcadores" parent="kronus_root_menu_embarques" sequence="31" action="embarcadores_list"/>-->
+
+  	<menuitem name="Consignatarios y Embarcadores" id="kronus_menu_consignatarios" parent="kronus_root_menu_embarques" sequence="32" action="consignatarios_list"/>
+
+  	 <menuitem name="Clientes" id="kronus_menu_clientes" parent="kronus_root_menu_embarques" sequence="33" action="clientes_list"/>
+
+  	 <menuitem name="Proveedores" id="kronus_menu_Proveedores" parent="kronus_root_menu_embarques" sequence="34" action="proveedores_list"/>
+
+  	 <menuitem name="Agentes" id="kronus_menu_Agentes" parent="kronus_root_menu_embarques" sequence="35" action="agentes_list"/>
+
+  </data>
+</odoo>

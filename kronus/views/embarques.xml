@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+
+        <record model="ir.ui.view" id="view_kronus_embarques_embarque_form">
+            <field name="name">view.kronus.embarques.embarque.form</field>
+            <field name="model">kronus.embarques.embarque</field>
+            <field name="arch" type="xml">
+                <form string="Embarque">
+                    <header>
+                        <button name="action_comenzar" states="draft" type="object" string="Comenzar embarque" attrs="{'invisible': [('state', '!=', 'draft')]}" class="btn-primary"/>
+                        <button name="action_finalizar" states="transit" type="object" string="Finalizar embarque" attrs="{'invisible': [('state', '!=', 'transit')]}" class="btn-primary"/>
+                        <button name="action_cancel" type="object" string="Cancelar" attrs="{'invisible': [('state', 'in', ['done', 'cancel'])]}" class="btn-danger"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft, transit, done, facturado" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="cotizacion" attrs="{'readonly': True }"/>
+                            <field name="currency_id" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="solicitud" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="cliente" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="contacto" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])], 'invisible': [('cliente', '=', False)]}" context="{'default_customer' : 0, 'default_parent_id' : cliente }"/>
+
+                            <field name="embarcador" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}" context="{'default_embarcador' : 1, 'default_customer' : 0 }"/>
+                            <field name="contacto_embarcador" attrs="{ 'readonly': [('state', 'in', ['done', 'cancel'])], 'invisible': [('embarcador', '=', False)]}" context="{ 'default_customer' : 0, 'default_parent_id' : embarcador }"/>
+
+                            <field name="consignatario" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}" context="{'default_consignatario' : 1, 'default_customer' : 0 }" />
+                            <field name="contacto_consignatario" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])], 'invisible': [('consignatario', '=', False)]}" context="{'default_customer' : 0, 'default_parent_id' : consignatario }"/>
+
+                            <!--<field name="agente_aduanal" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])], 'invisible': [('internacional', '!=', True)]}" context="{'default_agente' : 1, 'default_customer' : 0 }"/>
+                             <field name="cruce" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])], 'invisible': [('internacional', '!=', True)]}"/>
+                            
+                            <field name="internacional" attrs="{'readonly': True, 'invisible': [('internacional', '!=', True)] }"/>-->
+                            <field name="recoleccion_estimada" attrs="{'readonly': [('state', 'in', ['transit', 'done', 'cancel'])]}"/>
+                            <field name="entrega_estimada" attrs="{'readonly': [('state', 'in', ['transit','done', 'cancel'])]}"/>
+                            <field name="recoleccion_real" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="entrega_real" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <!--<field name="estatus" attrs="{'invisible': [('state', '!=', 'transit')]}"/>-->
+
+                            <field name="vehiculo" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="chofer" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="ruta"/>
+                            <field name="placas" attrs="{'readonly': [('state', 'in', ['done', 'cancel'])]}"/>
+                            <field name="evidencias" widget="many2many_binary"/>
+                        </group>
+                        <notebook>
+                            <page string="Cotización de venta">
+                                
+                            </page>
+                            <page string="Cotizaciones de compra">
+                                
+                                
+                            </page>
+                            <page string="Commodity">
+                                
+                            </page>
+                            <page string="Servicios adicionales">
+                                <group>
+                                    <field name="prepagado"/>
+                                    <field name="por_cobrar"/>
+                                    <field name="seguro"/>
+                                    <field name="garantizado"/>
+                                    <field name="rampa"/>
+                                    <field name="maniobras"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                </form>
+            </field>
+        </record>
+
+        <record id="view_kronus_embarques_embarque_tree" model="ir.ui.view">
+            <field name="name">view.kronus.embarques.embarque.tree</field>
+            <field name="model">kronus.embarques.embarque</field>
+            <field name="arch" type="xml">
+                <tree string="Embarques">
+                    <field name="name"/>
+                    <field name="cliente"/>
+                    <field name="solicitud"/>
+                    <field name="embarcador"/>
+                    <field name="consignatario"/>
+                    <field name="ruta"/>
+                    <field name="cotizacion"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="embarques_list" model="ir.actions.act_window">
+            <field name="name">Tabla Embarques</field>
+            <field name="res_model">kronus.embarques.embarque</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Embarques" id="kronus_menu_embarques" parent="kronus_root_menu_embarques" sequence="31" action="embarques_list"/>
+
+    </data>
+</openerp>

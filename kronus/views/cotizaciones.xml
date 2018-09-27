@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    
+
+    <!-- explicit list view definition -->
+    
+
+    <record model="ir.ui.view" id="view_kronus_embarques_cotizacion_form">
+      <field name="name">view.kronus.embarques.cotizacion.form</field>
+      <field name="model">kronus.embarques.cotizacion</field>
+      <field name="arch" type="xml">
+        <form string="Cotización">
+          
+          <sheet>
+            <h1>
+              <label string="Cotizaciones"/>
+            </h1>
+            <group>
+                <field name="cliente"/>
+                <field name="currency_id"/>
+                <field name="tengo_embarcador"/>
+                <field name="pais_origen" attrs="{'invisible': [ ('tengo_embarcador', '=', True)]}"/>
+                <field name="estado_origen" attrs="{'invisible': [ ('tengo_embarcador', '=', True)]}"/>
+                <field name="ciudad_origen" attrs="{'invisible': [ ('tengo_embarcador', '=', True)]}"/>
+                <field name="embarcador" attrs="{'invisible': [ ('tengo_embarcador', '=', False)]}"/>
+                <field name="tengo_consignatario"/>
+                <field name="pais_destino" attrs="{'invisible': [ ('tengo_consignatario', '=', True)]}"/>
+                <field name="estado_destino" attrs="{'invisible': [ ('tengo_consignatario', '=', True)]}"/>
+                <field name="ciudad_destino" attrs="{'invisible': [ ('tengo_consignatario', '=', True)]}"/>
+                <field name="consignatario" attrs="{'invisible': [ ('tengo_consignatario', '=', False)]}"/>
+                <field name="fecha_recoleccion"/>
+                <field name="fecha_entrega"/>
+                <field name="vehiculo"/>
+                <field name="ruta"/>
+           </group>
+            <notebook>
+                <page string="Cotización de venta">
+                  <!-- <field name="sale_order_line" mode="tree">
+                    <tree string="Productos" editable="bottom">
+                      <field name="vehiculo" />
+                      <field name="product_id" string="Tipo de servicio" />
+                      <field name="name" />
+                      <field name="product_qty" />
+                      <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use','=','sale')]" />
+
+                      <field name="price_unit" string="Precio unitario"/>
+
+                      <field name="price_subtotal" />
+                      <field name="price_total" />
+                    </tree>
+                  </field> -->  
+                    
+                </page>
+                <page string="Cotizaciones de compra">
+                    
+                </page>
+                <page string="Historial">
+                    
+                </page>
+            </notebook>
+            
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_kronus_embarques_cotizacion_tree">
+      <field name="name">view.kronus.embarques.cotizacion.tree</field>
+      <field name="model">kronus.embarques.cotizacion</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="cliente"/>
+          <field name="contacto"/>
+        </tree>
+      </field>
+    </record>
+    
+
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="action_kronus_embarques_cotizacion_view">
+      <field name="name">Cotización</field>
+      <field name="res_model">kronus.embarques.cotizacion</field>
+      <field name="view_mode">tree,form</field>
+      
+
+    </record>
+    
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="appprueba.action_server">
+      <field name="name">appprueba server</field>
+      <field name="model_id" ref="model_appprueba_appprueba"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    
+    
+    
+
+    
+    <!-- menu categories -->
+    <menuitem name="Cotizaciones" id="kronus_menu_cotizaciones" parent="kronus_root_menu_embarques" sequence="30" action="action_kronus_embarques_cotizacion_view"/>
+
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="appprueba.menu_1_list" parent="appprueba.menu_1"
+              action="appprueba.action_window"/>
+    <menuitem name="Server to list" id="appprueba" parent="appprueba.menu_2"
+              action="appprueba.action_server"/>
+    -->
+  </data>
+</odoo>
